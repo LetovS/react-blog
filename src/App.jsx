@@ -1,18 +1,21 @@
-import { useState } from "react";
 import "./App.css";
 import Layout from "./components/Layout/Layout";
-import Modal from "./components/Modal/Modal";
+import Works from "./components/Works/Works";
+import Blog from "./Routes/Blog/Blog";
+import BlogPost from "./Routes/BlogPost/BlogPost";
+import { Routes, Route } from "react-router-dom";
+import Testimonials from "./components/Testimonial/Testimonials.jsx";
+import ModalButton from "./components/Buttons/ModalButton.jsx";
 
 function App() {
-    const [isModalOpen, setIsModalOpen] = useState(false);
-
     return (
-        <Layout>
-            <button className="open-modal-btn" onClick={() => setIsModalOpen(true)}>
-                Написать мне
-            </button>
-            {isModalOpen && <Modal onClose={() => setIsModalOpen(false)} />}
-        </Layout>
+        <Routes>
+            <Route path="/" element={<Layout> <ModalButton/> </Layout>}/>
+            <Route path="/works" element={<Layout><Works /></Layout>}/>
+            <Route path="/testimonials" element={<Layout><Testimonials /></Layout>}/>
+            <Route path="/blog" element={<Layout><Blog /></Layout>} />
+            <Route path="/blog/:id" element={<Layout><BlogPost /></Layout>} />
+        </Routes>
     );
 }
 
