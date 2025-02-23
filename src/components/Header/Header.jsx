@@ -1,14 +1,10 @@
 import './Header.css';
-import { Link } from 'react-router-dom'; // Импортируем Link
+import BurgerMenu from "../BurgerMenu/BurgerMenu.jsx";
+import useWindowSize from "../../hooks/useWindowSize.js";
+import Menu from "../Menu/Menu.jsx"; // Импортируем Link
 
 const Header = () => {
-    const MENU = [
-        { title: 'На главную', to: '/' },
-        { title: 'Работы', to: '/works' },
-        { title: 'Отзывы', to: '/testimonials' },
-        { title: 'Блог', to: '/blog' }
-    ];
-
+    const { width } = useWindowSize(); // Получаем ширину окна
     return (
         <header className="header">
             {/* Логотип слева */}
@@ -17,15 +13,10 @@ const Header = () => {
             </div>
 
             {/* Меню справа */}
-            <nav className="nav">
-                <ul className="menu">
-                    {MENU.map(({ title, to }, i) => (
-                        <li key={`${i}-menu-item`} className="menu-item">
-                            <Link to={to}>{title}</Link>
-                        </li>
-                    ))}
-                </ul>
-            </nav>
+            {width < 768 ? <BurgerMenu /> : (
+                <Menu/>
+            )}
+
         </header>
     );
 };

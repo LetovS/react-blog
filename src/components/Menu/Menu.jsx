@@ -1,12 +1,12 @@
 import { Link } from "react-router-dom";
-import './Main.css';
+import './Menu.css';
 
-export default function Main() {
+export default function Menu() {
     const MENU = [
         { title: "На главную", to: "/" },
-        { title: "Работы", to: "works" },
-        { title: "Отзывы", to: "testimonials" },
-        { title: "Блог", to: "blog" },
+        { title: "Работы", to: "/works" },
+        { title: "Отзывы", to: "/testimonials" },
+        { title: "Блог", to: "/blog" },
     ];
     return (
         <nav className="nav">
