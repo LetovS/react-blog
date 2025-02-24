@@ -1,6 +1,10 @@
+import { useContext } from 'react';
+import { ThemeContext } from '../../context/ThemeContext/ThemeContext.jsx';
 import './Testimonials.css';
 
 const Testimonials = () => {
+    const { theme } = useContext(ThemeContext); // Получаем текущую тему
+
     // Пример данных об отзывах
     const testimonials = [
         {
@@ -24,7 +28,7 @@ const Testimonials = () => {
     ];
 
     return (
-        <section className="testimonials">
+        <section className={`testimonials ${theme}`}>
             <h2 className="testimonials-title">Отзывы</h2>
             <div className="testimonials-list">
                 {testimonials.map((testimonial) => (

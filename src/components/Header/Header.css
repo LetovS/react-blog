@@ -1,44 +1,49 @@
+/* Базовые стили для header */
 .header {
     display: flex;
     justify-content: space-between; /* Лого слева, меню справа */
-    align-items: flex-end; /* Прижимаем элементы к низу */
-    padding: 10px 20px;
-    background-color: #c6d8e4;
+    align-items: center; /* Центрируем элементы по вертикали */
+    padding: 0.625rem 1.25rem; /* 10px 20px в rem */
+    background-color: #646cff;
     color: white;
+    box-sizing: border-box; /* Убедимся, что padding не увеличивает общую ширину */
 }
 
+/* Логотип */
 .logo img {
-    height: 100px; /* Высота логотипа */
+    height: 6.25rem; /* 100px в rem */
 }
 
+/* Навигация */
 .nav {
     display: flex;
-    align-items: flex-end; /* Прижимаем меню к низу */
+    align-items: center; /* Центрируем меню по вертикали */
 }
 
+/* Меню */
 .menu {
     width: 100%;
     display: flex;
     list-style: none;
     margin: 0;
     padding: 0;
-    gap: 20px; /* Расстояние между пунктами меню */
+    gap: 1.25rem; /* 20px в rem */
 }
 
-/* Стили для каждого элемента меню */
+/* Элементы меню */
 .menu-item {
     margin: 0;
     padding: 0;
     transition: transform 0.3s ease; /* Плавное увеличение */
 }
 
-/* Стили для ссылок внутри элементов меню */
+/* Ссылки в меню */
 .menu-item a {
     text-decoration: none; /* Убираем подчёркивание */
     color: #333; /* Цвет текста */
     font-size: 1.1rem;
-    padding: 10px 15px; /* Отступы внутри ссылки */
-    border-radius: 5px; /* Скругление углов */
+    padding: 0.625rem 0.9375rem; /* 10px 15px в rem */
+    border-radius: 0.3125rem; /* 5px в rem */
     transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease; /* Плавные переходы */
     display: inline-block; /* Чтобы transform работал корректно */
 }
@@ -48,4 +53,94 @@
     background-color: #646cff; /* Цвет фона при наведении */
     color: white; /* Цвет текста при наведении */
     transform: scale(1.1); /* Увеличение элемента на 10% */
+}
+
+/* Стили для темы */
+.header.light {
+    background-color: #c6d8e4;
+    color: #333;
+}
+
+.header.dark {
+    background-color: #333;
+    color: #fff;
+}
+
+/* Стили для слайдера */
+.theme-switcher {
+    display: flex;
+    align-items: center;
+    margin-right: 1.25rem; /* 20px в rem */
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 3.75rem; /* 60px в rem */
+    height: 2.125rem; /* 34px в rem */
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: 0.4s;
+    border-radius: 2.125rem; /* 34px в rem */
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 1.625rem; /* 26px в rem */
+    width: 1.625rem; /* 26px в rem */
+    left: 0.25rem; /* 4px в rem */
+    bottom: 0.25rem; /* 4px в rem */
+    background-color: white;
+    transition: 0.4s;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: #646cff;
+}
+
+input:checked + .slider:before {
+    transform: translateX(1.625rem); /* 26px в rem */
+}
+
+.slider.round {
+    border-radius: 2.125rem; /* 34px в rem */
+}
+
+/* Медиа-запросы для адаптации */
+@media (max-width: 48rem) { /* 768px в rem */
+    .theme-switcher {
+        margin-right: 0.625rem; /* 10px в rem */
+    }
+
+    .switch {
+        width: 2.25rem; /* 36px в rem */
+        height: 1.25rem; /* 20px в rem */
+    }
+
+    .slider:before {
+        height: 1rem; /* 16px в rem */
+        width: 1rem; /* 16px в rem */
+        left: 0.125rem; /* 2px в rem */
+        bottom: 0.125rem; /* 2px в rem */
+    }
+
+    input:checked + .slider:before {
+        transform: translateX(1rem); /* 16px в rem */
+    }
 }

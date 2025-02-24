@@ -1,5 +1,5 @@
 .footer {
-    background-color: #333;
+    background-color: #f0f0f0;
     color: white;
     padding: 1rem;
     text-align: center;
@@ -7,4 +7,9 @@
     bottom: 0;
     width: 100%;
     font-size: 2rem;
+}
+
+.footer.dark {
+    background-color: #1a1a1a;
+    color: #fff;
 }
