@@ -7,16 +7,64 @@ import { Routes, Route } from "react-router-dom";
 import Testimonials from "./components/Testimonial/Testimonials.jsx";
 import Home from "./pages/Home.jsx";
 import { ThemeProvider } from "./context/ThemeContext/ThemeContext.jsx";
+import ProtectedRoute from './components/Protect/ProtectedRoute.jsx';
+import Gallery from "./components/Gallery/Gallery.jsx";
 
 function App() {
     return (
         <ThemeProvider>
             <Routes>
                 <Route path="/" element={<Home />} />
-                <Route path="/works" element={<Layout><Works /></Layout>} />
-                <Route path="/testimonials" element={<Layout><Testimonials /></Layout>} />
-                <Route path="/blog" element={<Layout><Blog /></Layout>} />
-                <Route path="/blog/:id" element={<Layout><BlogPost /></Layout>} />
+                <Route
+                    path="/works"
+                    element={
+                        <ProtectedRoute>
+                            <Layout>
+                                <Works />
+                            </Layout>
+                        </ProtectedRoute>
+                    }
+                />
+                <Route
+                    path="/testimonials"
+                    element={
+                        <ProtectedRoute>
+                            <Layout>
+                                <Testimonials />
+                            </Layout>
+                        </ProtectedRoute>
+                    }
+                />
+                <Route
+                    path="/blog"
+                    element={
+                        <ProtectedRoute>
+                            <Layout>
+                                <Blog />
+                            </Layout>
+                        </ProtectedRoute>
+                    }
+                />
+                <Route
+                    path="/blog/:id"
+                    element={
+                        <ProtectedRoute>
+                            <Layout>
+                                <BlogPost />
+                            </Layout>
+                        </ProtectedRoute>
+                    }
+                />
+                <Route
+                    path="/gallery"
+                    element={
+                        <ProtectedRoute>
+                            <Layout>
+                                <Gallery />
+                            </Layout>
+                        </ProtectedRoute>
+                    }
+                />
             </Routes>
         </ThemeProvider>
     );

@@ -1,9 +1,9 @@
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom'; // Для перенаправления
+import { useNavigate } from 'react-router-dom';
 import styles from './Form.module.css';
-import {useState} from "react";
 
-const Form = () => {
+const LoginForm = () => {
     const {
         register,
         handleSubmit,
@@ -11,12 +11,11 @@ const Form = () => {
     } = useForm();
 
     const [apiError, setApiError] = useState('');
-    const navigate = useNavigate(); // Хук для навигации
+    const navigate = useNavigate();
 
     const onSubmit = async (data) => {
         try {
-            // Отправляем данные на сервер
-            const response = await fetch('http://localhost:5000/register', {
+            const response = await fetch('http://localhost:5000/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -27,32 +26,19 @@ const Form = () => {
             const result = await response.json();
 
             if (response.ok) {
+                localStorage.setItem('token', result.token); // Сохраняем токен
                 navigate('/works'); // Перенаправляем на страницу /works
             } else {
-                setApiError(result.message); // Ошибка регистрации
+                setApiError(result.message); // Ошибка авторизации
             }
         } catch (error) {
             console.error('Ошибка при отправке данных:', error);
-            setApiError('Произошла ошибка при регистрации');
+            setApiError('Произошла ошибка при авторизации');
         }
     };
 
     return (
         <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
-            <div className={styles.formGroup}>
-                <label>Имя</label>
-                <input
-                    {...register('name', {
-                        required: 'Имя обязательно',
-                        pattern: {
-                            value: /^[A-Za-zА-Яа-я\s]+$/i,
-                            message: 'Имя должно содержать только буквы',
-                        },
-                    })}
-                    placeholder="Введите ваше имя"
-                />
-                {errors.name && <span className={styles.error}>{errors.name.message}</span>}
-            </div>
             <div className={styles.formGroup}>
                 <label>Email</label>
                 <input
@@ -81,14 +67,13 @@ const Form = () => {
                     placeholder="Введите пароль"
                 />
                 {errors.password && <span className={styles.error}>{errors.password.message}</span>}
-                {/* Отображение ошибки от API */}
                 {apiError && <span className={styles.error}>{apiError}</span>}
             </div>
             <button type="submit" className={styles.submitButton}>
-                Зарегистрироваться
+                Войти
             </button>
         </form>
     );
 };
 
-export default Form;
+export default LoginForm;

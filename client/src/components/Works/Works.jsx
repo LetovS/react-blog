@@ -1,31 +1,127 @@
-import Slider from '../Slider/Slider.jsx';
-import { SliderProvider } from '../Slider/SliderContext.jsx';
+import { useState, useEffect } from 'react';
+import TodoCard from '../TodoCard/TodoCard.jsx';
+import TodoModal from '../Modal/TodoModal.jsx';
+import styles from './Works.module.css';
 
 const Works = () => {
-    const slides = [
-        {
-            image: 'https://images.unsplash.com/photo-1740341459122-cc16499650bc?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-            title: 'Санкт-Петербург',
-            description: 'Описание для проекта 1',
-        },
-        {
-            image: 'https://images.unsplash.com/photo-1736618626127-e833113e7b88?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-            title: 'Санторини',
-            description: 'Описание для проекта 2',
-        },
-        {
-            image: 'https://images.unsplash.com/photo-1738102449463-638de653a808?q=80&w=1848&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-            title: 'Двйвинг',
-            description: 'Описание для проекта 3',
-        },
-    ];
+    const [todos, setTodos] = useState([]);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [selectedTodo, setSelectedTodo] = useState(null); // Выбранная задача для редактирования
+    const [isEditMode, setIsEditMode] = useState(false); // Режим редактирования
+
+    // Загрузка списка задач
+    useEffect(() => {
+        const fetchTodos = async () => {
+            try {
+                const response = await fetch('http://localhost:5000/todo-list');
+                if (!response.ok) {
+                    throw new Error('Ошибка при загрузке задач');
+                }
+                const data = await response.json();
+                setTodos(data);
+            } catch (error) {
+                console.error('Ошибка при загрузке задач:', error);
+            }
+        };
+
+        fetchTodos();
+    }, []);
+
+    // Обработчик добавления задачи
+    const handleAddTodo = async (newTodo) => {
+        try {
+            const response = await fetch('http://localhost:5000/todo', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(newTodo),
+            });
+
+            if (response.ok) {
+                const createdTodo = await response.json();
+                setTodos([...todos, createdTodo]); // Добавляем новую задачу в список
+            } else {
+                console.error('Ошибка при создании задачи');
+            }
+        } catch (error) {
+            console.error('Ошибка при отправке данных:', error);
+        }
+    };
+
+    // Обработчик редактирования задачи
+    const handleEditTodo = async (updatedTodo) => {
+        try {
+            const response = await fetch(`http://localhost:5000/todo/${updatedTodo.id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(updatedTodo),
+            });
+
+            if (response.ok) {
+                const updatedData = await response.json();
+                setTodos(todos.map(todo => (todo.id === updatedData.id ? updatedData : todo))); // Обновляем задачу в списке
+            } else {
+                console.error('Ошибка при редактировании задачи');
+            }
+        } catch (error) {
+            console.error('Ошибка при отправке данных:', error);
+        }
+    };
+
+    // Обработчик просмотра деталей задачи
+    const handleViewDetails = (todo) => {
+        setSelectedTodo(todo); // Устанавливаем выбранную задачу
+        setIsEditMode(true); // Включаем режим редактирования
+        setIsModalOpen(true); // Открываем модальное окно
+    };
+
+    // Обработчик закрытия модального окна
+    const handleCloseModal = () => {
+        setIsModalOpen(false);
+        setSelectedTodo(null);
+        setIsEditMode(false);
+    };
+
+    // Обработчик отправки формы (создание или редактирование)
+    const handleSubmit = (todo) => {
+        if (isEditMode) {
+            handleEditTodo(todo); // Редактируем задачу
+        } else {
+            handleAddTodo(todo); // Создаём новую задачу
+        }
+    };
 
     return (
-        <div>
-            <h1>Мои работы</h1>
-            <SliderProvider>
-                <Slider slides={slides} />
-            </SliderProvider>
+        <div className={styles.works}>
+            <h1>Список задач</h1>
+
+            {/* Кнопка "Добавить задачу" */}
+            <button onClick={() => setIsModalOpen(true)} className={styles.addButton}>
+                Добавить задачу
+            </button>
+
+            {/* Список задач */}
+            <div className={styles.todoList}>
+                {todos.map((todo) => (
+                    <TodoCard
+                        key={todo.id}
+                        todo={todo}
+                        onViewDetails={handleViewDetails} // Передаём функцию для просмотра деталей
+                    />
+                ))}
+            </div>
+
+            {/* Модальное окно для добавления/редактирования задачи */}
+            <TodoModal
+                isOpen={isModalOpen}
+                onClose={handleCloseModal}
+                onSubmit={handleSubmit}
+                initialData={selectedTodo} // Передаём данные выбранной задачи
+                isEditMode={isEditMode} // Режим редактирования
+            />
         </div>
     );
 };

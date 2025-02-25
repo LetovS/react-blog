@@ -11,6 +11,7 @@ export default function Menu() {
         { title: "Работы", to: "/works" },
         { title: "Отзывы", to: "/testimonials" },
         { title: "Блог", to: "/blog" },
+        { title: "Галерея", to: "/gallery" },
     ];
 
     return (

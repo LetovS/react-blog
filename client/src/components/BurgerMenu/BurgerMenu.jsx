@@ -9,6 +9,7 @@ const BurgerMenu = () => {
                 <a href="/works">Мои работы</a>
                 <a href="/testimonials">Отзывы</a>
                 <a href="/blog">Блог</a>
+                <a href="/gallery">Блог</a>
             </nav>
         </div>
     );
