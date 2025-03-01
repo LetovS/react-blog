@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import TodoCard from '../TodoCard/TodoCard.jsx';
 import TodoModal from '../Modal/TodoModal.jsx';
 import styles from './Works.module.css';
+import ModalButton from "../Buttons/ModalButton.jsx";
 
 const Works = () => {
     const [todos, setTodos] = useState([]);
@@ -122,6 +123,7 @@ const Works = () => {
                 initialData={selectedTodo} // Передаём данные выбранной задачи
                 isEditMode={isEditMode} // Режим редактирования
             />
+            <ModalButton/>
         </div>
     );
 };

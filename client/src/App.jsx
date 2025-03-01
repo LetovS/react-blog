@@ -7,7 +7,7 @@ import { Routes, Route } from "react-router-dom";
 import Testimonials from "./components/Testimonial/Testimonials.jsx";
 import Home from "./pages/Home.jsx";
 import { ThemeProvider } from "./context/ThemeContext/ThemeContext.jsx";
-import ProtectedRoute from './components/Protect/ProtectedRoute.jsx';
+import Protected from './components/Protect/ProtectedRoute.jsx';
 import Gallery from "./components/Gallery/Gallery.jsx";
 
 function App() {
@@ -18,51 +18,51 @@ function App() {
                 <Route
                     path="/works"
                     element={
-                        <ProtectedRoute>
+                        <Protected>
                             <Layout>
                                 <Works />
                             </Layout>
-                        </ProtectedRoute>
+                        </Protected>
                     }
                 />
                 <Route
                     path="/testimonials"
                     element={
-                        <ProtectedRoute>
+                        <Protected>
                             <Layout>
                                 <Testimonials />
                             </Layout>
-                        </ProtectedRoute>
+                        </Protected>
                     }
                 />
                 <Route
                     path="/blog"
                     element={
-                        <ProtectedRoute>
+                        <Protected>
                             <Layout>
                                 <Blog />
                             </Layout>
-                        </ProtectedRoute>
+                        </Protected>
                     }
                 />
                 <Route
                     path="/blog/:id"
                     element={
-                        <ProtectedRoute>
+                        <Protected>
                             <Layout>
                                 <BlogPost />
                             </Layout>
-                        </ProtectedRoute>
+                        </Protected>
                     }
                 />
                 <Route
                     path="/gallery"
                     element={
-                        <ProtectedRoute>
+                        <Protected>
                             <Layout>
                                 <Gallery />
                             </Layout>
-                        </ProtectedRoute>
+                        </Protected>
                     }
                 />
             </Routes>

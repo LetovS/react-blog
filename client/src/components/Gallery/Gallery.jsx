@@ -1,5 +1,5 @@
 import Slider from '../Slider/Slider.jsx';
-import { SliderProvider } from '../Slider/SliderContext.jsx';
+import { SliderProvider } from '../../context/SliderContext/SliderContext.jsx';
 
 const Works = () => {
     const slides = [

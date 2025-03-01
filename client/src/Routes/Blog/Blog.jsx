@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import './Blog.css';
 
 const Blog = () => {
-    const [posts, setPosts] = useState([]); // Начальное состояние — пустой массив
+    const [posts, setPosts] = useState([]);
 
     useEffect(() => {
         // Запрос к API
@@ -11,7 +11,7 @@ const Blog = () => {
             .then((response) => response.json())
             .then((data) => setPosts(data))
             .catch((error) => console.error('Ошибка при загрузке данных:', error));
-    }, []); // Пустой массив зависимостей, чтобы запрос выполнялся только один раз
+    }, []);
 
     return (
         <div className="blog">

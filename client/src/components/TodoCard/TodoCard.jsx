@@ -35,8 +35,8 @@ TodoCard.propTypes = {
         title: PropTypes.string.isRequired,
         completed: PropTypes.bool.isRequired,
     }).isRequired,
-    onToggleComplete: PropTypes.func.isRequired, // onToggleComplete должен быть функцией
-    onViewDetails: PropTypes.func.isRequired, // onViewDetails должен быть функцией
+    onToggleComplete: PropTypes.func, // onToggleComplete должен быть функцией
+    onViewDetails: PropTypes.func // onViewDetails должен быть функцией
 };
 
 export default TodoCard;

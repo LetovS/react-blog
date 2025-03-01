@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { SliderContext } from './SliderContext';
+import { SliderContext } from '../../context/SliderContext/SliderContext.jsx';
 import Slide from './Slide';
 import Dots from './Dots';
 import styles from './Slider.module.css';

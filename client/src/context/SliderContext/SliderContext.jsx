@@ -16,5 +16,5 @@ export const SliderProvider = ({ children }) => {
 };
 
 SliderProvider.propTypes = {
-    children: PropTypes.node.isRequired, // `children` должен быть React-нодой
+    children: PropTypes.node.isRequired,
 };

@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { SliderContext } from './SliderContext';
+import { SliderContext } from '../../context/SliderContext/SliderContext.jsx';
 import styles from './Slider.module.css';
 import PropTypes from 'prop-types';
 
