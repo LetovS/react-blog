@@ -1,14 +1,14 @@
 import "./App.css";
-import Layout from "./components/Layout/Layout";
-import Works from "./components/Works/Works.jsx";
+import Layout from "./components/Layout/Layout.js";
+import Works from "./components/Works/Works.tsx";
 import Blog from "./Routes/Blog/Blog";
 import BlogPost from "./Routes/BlogPost/BlogPost";
 import { Routes, Route } from "react-router-dom";
-import Testimonials from "./components/Testimonial/Testimonials.jsx";
+import Testimonials from "./components/Testimonial/Testimonials.tsx";
 import Home from "./pages/Home.jsx";
-import { ThemeProvider } from "./context/ThemeContext/ThemeContext.jsx";
-import Protected from './components/Protect/ProtectedRoute.jsx';
-import Gallery from "./components/Gallery/Gallery.jsx";
+import { ThemeProvider } from "./context/ThemeContext/ThemeContext.tsx";
+import Protected from './components/Protect/ProtectedRoute.tsx';
+import Gallery from "./components/Gallery/Gallery.tsx";
 
 function App() {
     return (

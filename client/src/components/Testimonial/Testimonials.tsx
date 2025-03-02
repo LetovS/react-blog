@@ -1,12 +1,19 @@
-import { useContext } from 'react';
-import { ThemeContext } from '../../context/ThemeContext/ThemeContext.jsx';
+import React, { useContext } from 'react';
+import { ThemeContext } from '../../context/ThemeContext/ThemeContext';
 import './Testimonials.css';
 
-const Testimonials = () => {
+interface ITestimonial{
+    id: number;
+    name: string;
+    text: string;
+    avatar: string;
+}
+
+const Testimonials: React.FC = () => {
     const { theme } = useContext(ThemeContext); // Получаем текущую тему
 
     // Пример данных об отзывах
-    const testimonials = [
+    const testimonials: ITestimonial[] = [
         {
             id: 1,
             name: 'Иван Иванов',

@@ -1,10 +1,24 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import styles from './TodoCard.module.css';
-import PropTypes from 'prop-types';
 
-const TodoCard = ({ todo, onToggleComplete, onViewDetails }) => {
+// Определяем тип для задачи
+export interface ITodo {
+    id: number;
+    title: string;
+    completed: boolean;
+}
+
+// Определяем тип для пропсов компонента TodoCard
+export interface ITodoListProps {
+    todo: ITodo; // Задача
+    onToggleComplete: (id: number, completed: boolean) => void; // Функция для переключения статуса задачи
+    onViewDetails: (todo: ITodo) => void; // Функция для просмотра деталей задачи
+}
+
+const TodoCard: React.FC<ITodoListProps> = ({ todo, onToggleComplete, onViewDetails }) => {
     const [isCompleted, setIsCompleted] = useState(todo.completed);
 
+    // Обработчик изменения статуса задачи
     const handleCheckboxChange = async () => {
         const updatedCompletedStatus = !isCompleted;
         setIsCompleted(updatedCompletedStatus);
@@ -27,16 +41,6 @@ const TodoCard = ({ todo, onToggleComplete, onViewDetails }) => {
             </div>
         </div>
     );
-};
-
-TodoCard.propTypes = {
-    todo: PropTypes.shape({
-        id: PropTypes.number.isRequired,
-        title: PropTypes.string.isRequired,
-        completed: PropTypes.bool.isRequired,
-    }).isRequired,
-    onToggleComplete: PropTypes.func, // onToggleComplete должен быть функцией
-    onViewDetails: PropTypes.func // onViewDetails должен быть функцией
 };
 
 export default TodoCard;

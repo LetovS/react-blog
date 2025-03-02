@@ -1,9 +1,9 @@
-import { useContext } from 'react';
-import { useNavigate } from 'react-router-dom'; // Импортируем useNavigate для перенаправления
-import { ThemeContext } from '../../context/ThemeContext/ThemeContext.jsx'; // Импортируем ThemeContext
+import React, { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { ThemeContext } from '../../context/ThemeContext/ThemeContext';
 import './Footer.css';
 
-const Footer = () => {
+const Footer: React.FC = () => {
     const { theme } = useContext(ThemeContext); // Получаем текущую тему
     const navigate = useNavigate(); // Хук для навигации
 

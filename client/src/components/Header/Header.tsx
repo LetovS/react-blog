@@ -1,13 +1,13 @@
 import './Header.css';
-import BurgerMenu from "../BurgerMenu/BurgerMenu.jsx";
-import useWindowSize from "../../hooks/useWindowSize.js";
-import Menu from "../Menu/Menu.jsx";
-import { useContext } from 'react';
-import { ThemeContext } from '../../context/ThemeContext/ThemeContext.jsx'; // Импортируем ThemeContext
+import BurgerMenu from '../BurgerMenu/BurgerMenu';
+import useWindowSize from '../../hooks/useWindowSize';
+import Menu from '../Menu/Menu';
+import React, { useContext } from 'react';
+import { ThemeContext, IThemeContext } from '../../context/ThemeContext/ThemeContext';
 
-const Header = () => {
+const Header: React.FC = () => {
     const { width } = useWindowSize();
-    const { theme, toggleTheme } = useContext(ThemeContext); // Получаем тему и функцию для её переключения
+    const { theme, toggleTheme } = useContext(ThemeContext) as IThemeContext; // Типизируем контекст
 
     return (
         <header className={`header ${theme}`}>
@@ -22,7 +22,11 @@ const Header = () => {
             {/* Слайдер для смены темы */}
             <div className="theme-switcher">
                 <label className="switch">
-                    <input type="checkbox" checked={theme === 'dark'} onChange={toggleTheme} />
+                    <input
+                        type="checkbox"
+                        checked={theme === 'dark'}
+                        onChange={toggleTheme}
+                    />
                     <span className="slider round"></span>
                 </label>
             </div>

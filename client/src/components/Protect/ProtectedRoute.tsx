@@ -1,6 +1,8 @@
 import { Navigate } from 'react-router-dom';
-import PropTypes  from "prop-types";
-const ProtectedRoute = ({ children }) => {
+import  React from 'react';
+import {IProviderProps} from "../../interfaces/IProviderProps";
+
+const ProtectedRoute: React.FC<IProviderProps> = ({ children }) => {
     const token = localStorage.getItem('token'); // Получаем токен
 
     if (!token) {
@@ -9,9 +11,5 @@ const ProtectedRoute = ({ children }) => {
 
     return children;
 };
-
-ProtectedRoute.propTypes = {
-    children: PropTypes.node.isRequired,
-}
 
 export default ProtectedRoute;

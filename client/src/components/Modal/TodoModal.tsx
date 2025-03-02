@@ -1,9 +1,27 @@
-import { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
+import React, { useState, useEffect } from 'react';
 import styles from './TodoModal.module.css';
 
-const TodoModal = ({ isOpen, onClose, onSubmit, initialData, isEditMode }) => {
-    const [todo, setTodo] = useState({
+// Определяем тип для задачи
+interface ITodo {
+    id?: number; // Опциональный идентификатор
+    title: string;
+    startTime: string;
+    endTime: string;
+    description: string;
+    result: string;
+}
+
+// Определяем тип для пропсов компонента TodoModal
+interface ITodoModalProps {
+    isOpen: boolean; // Открыто ли модальное окно
+    onClose: () => void; // Функция для закрытия модального окна
+    onSubmit: (todo: ITodo) => void; // Функция для отправки данных задачи
+    initialData?: ITodo; // Начальные данные для редактирования
+    isEditMode?: boolean; // Режим редактирования
+}
+
+const TodoModal: React.FC<ITodoModalProps> = ({ isOpen, onClose, onSubmit, initialData, isEditMode = false }) => {
+    const [todo, setTodo] = useState<ITodo>({
         title: '',
         startTime: '',
         endTime: '',
@@ -26,17 +44,20 @@ const TodoModal = ({ isOpen, onClose, onSubmit, initialData, isEditMode }) => {
         }
     }, [initialData]);
 
-    const handleInputChange = (e) => {
+    // Обработчик изменения полей формы
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value } = e.target;
         setTodo({ ...todo, [name]: value });
     };
 
-    const handleSubmit = (e) => {
+    // Обработчик отправки формы
+    const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         onSubmit(todo); // Передаём данные задачи в родительский компонент
         onClose(); // Закрываем модальное окно
     };
 
+    // Если модальное окно закрыто, ничего не рендерим
     if (!isOpen) return null;
 
     return (
@@ -105,27 +126,6 @@ const TodoModal = ({ isOpen, onClose, onSubmit, initialData, isEditMode }) => {
             </div>
         </div>
     );
-};
-
-// Определяем PropTypes для пропсов
-TodoModal.propTypes = {
-    isOpen: PropTypes.bool.isRequired,
-    onClose: PropTypes.func.isRequired,
-    onSubmit: PropTypes.func.isRequired,
-    initialData: PropTypes.shape({
-        id: PropTypes.number,
-        title: PropTypes.string,
-        startTime: PropTypes.string,
-        endTime: PropTypes.string,
-        description: PropTypes.string,
-        result: PropTypes.string,
-    }),
-    isEditMode: PropTypes.bool,
-};
-
-TodoModal.defaultProps = {
-    initialData: null,
-    isEditMode: false,
 };
 
 export default TodoModal;

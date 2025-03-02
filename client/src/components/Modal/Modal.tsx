@@ -1,7 +1,8 @@
-import PropTypes from 'prop-types'; // Импортируем prop-types
 import './Modal.css';
+import React from "react";
+import {IButtonClose} from "../../interfaces/IButtonClick";
 
-const Modal = ({ onClose }) => {
+const Modal: React.FC<IButtonClose> = ({ onClose }) => {
     return (
         <div className="modal-overlay">
             <div className="modal">
@@ -25,11 +26,6 @@ const Modal = ({ onClose }) => {
             </div>
         </div>
     );
-};
-
-// Валидация пропсов
-Modal.propTypes = {
-    onClose: PropTypes.func.isRequired, // onClose должен быть функцией и обязателен
 };
 
 export default Modal;
