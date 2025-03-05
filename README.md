@@ -21,7 +21,7 @@ npm run dev
 - Модальное окно с формой обратной связи (в footer "Написать мне")
 2 задание:
 - использованием Routes (в App.tsc + Protected - ака авторизация по токену)
-- компоненты Blog, BlogPost (http://localhost:5174/blog, http://localhost:5174/blog/id)
+- компоненты Blog, BlogPost (/blog, /blog/id)
 - BurgerMenu + useWindowSize при уменьшении ширины окна менее 768px Menu в Header всхлопывается до в мини меню
 3 задание:
 - контекст ThemeContext для переключения темы день\ночь, реализован в виде слайдера в Header, так же контекст берётся в footer
