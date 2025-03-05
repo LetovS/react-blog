@@ -1,19 +1,21 @@
-import { useForm } from 'react-hook-form';
+import { useForm, SubmitHandler  } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom'; // Для перенаправления
 import styles from './Form.module.css';
-import {useState} from "react";
+import React, {useState} from "react";
+import {IFormData} from "../../interfaces/IFormData";
 
-const Form = () => {
+
+const Form: React.FC = () => {
     const {
         register,
         handleSubmit,
         formState: { errors },
-    } = useForm();
+    } = useForm<IFormData>();
 
     const [apiError, setApiError] = useState('');
     const navigate = useNavigate(); // Хук для навигации
 
-    const onSubmit = async (data) => {
+    const onSubmit: SubmitHandler<IFormData> = async (data) => {
         try {
             // Отправляем данные на сервер
             const response = await fetch('http://localhost:5000/register', {

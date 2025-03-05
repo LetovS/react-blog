@@ -1,7 +1,15 @@
+import React from 'react';
 import styles from './TodoDetailsModal.module.css';
-import PropTypes from 'prop-types';
+import {ITodo} from '../../interfaces/ITodo'
 
-const TodoDetailsModal = ({ todo, onClose }) => {
+// Определяем интерфейс для пропсов компонента
+interface TodoDetailsModalProps {
+    todo: ITodo | null; // todo может быть null
+    onClose: () => void; // onClose — функция без аргументов и возвращаемого значения
+}
+
+const TodoDetailsModal: React.FC<TodoDetailsModalProps> = ({ todo, onClose }) => {
+    // Если todo равен null, не рендерим компонент
     if (!todo) return null;
 
     return (
@@ -17,18 +25,6 @@ const TodoDetailsModal = ({ todo, onClose }) => {
             </div>
         </div>
     );
-};
-
-// Определяем PropTypes для пропсов
-TodoDetailsModal.propTypes = {
-    todo: PropTypes.shape({
-        title: PropTypes.string.isRequired,
-        startTime: PropTypes.string.isRequired,
-        endTime: PropTypes.string.isRequired,
-        description: PropTypes.string.isRequired,
-        result: PropTypes.string.isRequired,
-    }),
-    onClose: PropTypes.func.isRequired, // onClose должен быть функцией
 };
 
 export default TodoDetailsModal;

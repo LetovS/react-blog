@@ -1,12 +1,7 @@
 import React, { useState } from 'react';
 import styles from './TodoCard.module.css';
+import {ITodo} from '../../interfaces/ITodo'
 
-// Определяем тип для задачи
-export interface ITodo {
-    id: number;
-    title: string;
-    completed: boolean;
-}
 
 // Определяем тип для пропсов компонента TodoCard
 export interface ITodoListProps {
@@ -22,7 +17,7 @@ const TodoCard: React.FC<ITodoListProps> = ({ todo, onToggleComplete, onViewDeta
     const handleCheckboxChange = async () => {
         const updatedCompletedStatus = !isCompleted;
         setIsCompleted(updatedCompletedStatus);
-        await onToggleComplete(todo.id, updatedCompletedStatus);
+        await onToggleComplete(todo.id!, updatedCompletedStatus); // Используем id! так как оно может быть undefined
     };
 
     return (

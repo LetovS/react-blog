@@ -1,32 +1,27 @@
 import React, { useState, useEffect } from 'react';
 import styles from './TodoModal.module.css';
+import {ITodo} from '../../interfaces/ITodo'
 
-// Определяем тип для задачи
-interface ITodo {
-    id?: number; // Опциональный идентификатор
-    title: string;
-    startTime: string;
-    endTime: string;
-    description: string;
-    result: string;
-}
 
 // Определяем тип для пропсов компонента TodoModal
 interface ITodoModalProps {
-    isOpen: boolean; // Открыто ли модальное окно
-    onClose: () => void; // Функция для закрытия модального окна
-    onSubmit: (todo: ITodo) => void; // Функция для отправки данных задачи
-    initialData?: ITodo; // Начальные данные для редактирования
-    isEditMode?: boolean; // Режим редактирования
+    isOpen: boolean;
+    onClose: () => void;
+    onSubmit: (todo: ITodo) => void;
+    initialData: ITodo | null;
+    isEditMode?: boolean;
 }
 
 const TodoModal: React.FC<ITodoModalProps> = ({ isOpen, onClose, onSubmit, initialData, isEditMode = false }) => {
+
     const [todo, setTodo] = useState<ITodo>({
+        id: -1,
         title: '',
         startTime: '',
         endTime: '',
         description: '',
         result: '',
+        completed: false,
     });
 
     // Если переданы начальные данные, заполняем форму
@@ -35,11 +30,13 @@ const TodoModal: React.FC<ITodoModalProps> = ({ isOpen, onClose, onSubmit, initi
             setTodo(initialData);
         } else {
             setTodo({
+                id: -1,
                 title: '',
                 startTime: '',
                 endTime: '',
                 description: '',
                 result: '',
+                completed: false,
             });
         }
     }, [initialData]);

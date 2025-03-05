@@ -5,7 +5,7 @@ import TodoModal from '../Modal/TodoModal';
 import TodoList from '../TodoList/TodoList';
 import AddTodoButton from '../TodoList/AddTodoButton';
 import ModalButton from '../Buttons/ModalButton';
-import {ITodo} from '../TodoCard/TodoCard'
+import {ITodo} from '../../interfaces/ITodo' // Импортируем общий интерфейс
 import styles from './Works.module.css';
 
 const Works: React.FC = () => {
@@ -14,54 +14,47 @@ const Works: React.FC = () => {
     const [selectedTodo, setSelectedTodo] = useState<ITodo | null>(null);
     const [isEditMode, setIsEditMode] = useState(false);
 
-    // Обработчик просмотра деталей задачи
     const handleViewDetails = (todo: ITodo) => {
         setSelectedTodo(todo);
         setIsEditMode(true);
         setIsModalOpen(true);
     };
 
-    // Обработчик закрытия модального окна
     const handleCloseModal = () => {
         setIsModalOpen(false);
         setSelectedTodo(null);
         setIsEditMode(false);
     };
 
-    // Обработчик отправки формы (создание или редактирование)
     const handleSubmit = (todo: ITodo) => {
         if (isEditMode) {
-            editTodo(todo); // Редактируем задачу
+            editTodo(todo);
         } else {
-            addTodo(todo); // Создаём новую задачу
+            addTodo({ ...todo, completed: false });
         }
     };
 
     return (
         <div className={styles.works}>
             <h1>Список задач</h1>
-
-            {/* Кнопка "Добавить задачу" */}
             <AddTodoButton onClick={() => setIsModalOpen(true)} />
-
-            {/* Список задач */}
             <TodoList
                 todos={todos}
                 onToggleComplete={async (id, completed) => {
-                    await editTodo({ ...todos.find(todo => todo.id === id)!, completed });
+                    const todoToUpdate = todos.find(todo => todo.id === id);
+                    if (todoToUpdate) {
+                        await editTodo({ ...todoToUpdate, completed });
+                    }
                 }}
                 onViewDetails={handleViewDetails}
             />
-
-            {/* Модальное окно для добавления/редактирования задачи */}
             <TodoModal
                 isOpen={isModalOpen}
                 onClose={handleCloseModal}
                 onSubmit={handleSubmit}
-                initialData={selectedTodo}
+                initialData={selectedTodo || ({} as ITodo)}
                 isEditMode={isEditMode}
             />
-
             <ModalButton />
         </div>
     );

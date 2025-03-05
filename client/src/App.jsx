@@ -1,8 +1,8 @@
 import "./App.css";
 import Layout from "./components/Layout/Layout.js";
 import Works from "./components/Works/Works.tsx";
-import Blog from "./Routes/Blog/Blog";
-import BlogPost from "./Routes/BlogPost/BlogPost";
+import Blog from "./Routes/Blog/Blog.js";
+import BlogPost from "./Routes/BlogPost/BlogPost.js";
 import { Routes, Route } from "react-router-dom";
 import Testimonials from "./components/Testimonial/Testimonials.tsx";
 import Home from "./pages/Home.jsx";

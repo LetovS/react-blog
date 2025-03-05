@@ -1,24 +1,30 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import styles from './TodoForm.module.css';
+import {ITodo} from '../../interfaces/ITodo'
 
-const TodoForm = ({ onSubmit }) => {
-    const [newTodo, setNewTodo] = useState({
+interface ITodoFormProps {
+    onSubmit: (todo: ITodo) => void; // onSubmit — функция, принимающая ITodo
+}
+
+const TodoForm: React.FC<ITodoFormProps> = ({ onSubmit }) => {
+    const [newTodo, setNewTodo] = useState<ITodo>({
+        completed: false, id: 0,
         title: '',
         startTime: '',
         endTime: '',
         description: '',
-        result: '',
+        result: ''
     });
 
-    const handleInputChange = (e) => {
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value } = e.target;
         setNewTodo({ ...newTodo, [name]: value });
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        onSubmit(newTodo);
-        setNewTodo({ title: '', startTime: '', endTime: '', description: '', result: '' }); // Очищаем форму
+        onSubmit(newTodo); // Передаем новую задачу в родительский компонент
+        setNewTodo({completed: false, id: 0, title: '', startTime: '', endTime: '', description: '', result: '' }); // Очищаем форму
     };
 
     return (

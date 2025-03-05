@@ -1,10 +1,6 @@
 import { useState, useEffect } from 'react';
+import {ITodo} from '../interfaces/ITodo'
 
-interface ITodo {
-    id: number;
-    title: string;
-    completed: boolean;
-}
 
 const useTodos = () => {
     const [todos, setTodos] = useState<ITodo[]>([]);

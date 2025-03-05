@@ -1,6 +1,7 @@
 import React from 'react';
-import TodoCard, {ITodo} from '../TodoCard/TodoCard';
+import TodoCard from '../TodoCard/TodoCard';
 import styles from './TodoList.module.css';
+import {ITodo} from '../../interfaces/ITodo'
 
 
 interface ITodoListProps {

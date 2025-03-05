@@ -1,19 +1,25 @@
-import { useState } from 'react';
-import { useForm } from 'react-hook-form';
+import React, { useState } from 'react';
+import { useForm,SubmitHandler } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import styles from './Form.module.css';
 
-const LoginForm = () => {
+interface ILoginFormData {
+    email: string;
+    password: string;
+}
+
+
+const LoginForm: React.FC = ()  => {
     const {
         register,
         handleSubmit,
         formState: { errors },
-    } = useForm();
+    } = useForm<ILoginFormData>();
 
     const [apiError, setApiError] = useState('');
     const navigate = useNavigate();
 
-    const onSubmit = async (data) => {
+    const onSubmit: SubmitHandler<ILoginFormData> = async (data) => {
         try {
             const response = await fetch('http://localhost:5000/login', {
                 method: 'POST',
