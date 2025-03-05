@@ -1,11 +1,23 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import Form from '../components/Form/Form'; // Импортируем форму регистрации
-import LoginForm from '../components/Form/LoginForm'; // Импортируем форму логина
-import styles from './Home.module.css'; // Предположим, что стили находятся в Home.module.css
+import Form from '../components/Form/Form'; // Форма регистрации
+import LoginForm from '../components/Form/LoginForm'; // Форма логина
+import Modal from '../components/Modal/Modal'; // Универсальное модальное окно
+import styles from './Home.module.css';
 
 const Home: React.FC = () => {
-    const [isLogin, setIsLogin] = useState(false); // Состояние для переключения между формами
+    const [isLogin, setIsLogin] = useState(true); // Состояние для переключения между формами
+    const [isModalOpen, setIsModalOpen] = useState(false); // Состояние для открытия/закрытия модального окна
+    const [modalContent, setModalContent] = useState<React.ReactNode>(null); // Контент модального окна
+
+    const openModal = (content: React.ReactNode) => {
+        setModalContent(content);
+        setIsModalOpen(true);
+    };
+
+    const closeModal = () => {
+        setIsModalOpen(false);
+    };
 
     return (
         <motion.div
@@ -37,28 +49,25 @@ const Home: React.FC = () => {
                 transition={{ delay: 1.5, duration: 1 }}
             >
                 <button
-                    onClick={() => setIsLogin(false)}
+                    onClick={() => openModal(<Form />)}
                     className={!isLogin ? styles.activeButton : styles.button}
                 >
                     Регистрация
                 </button>
                 <button
-                    onClick={() => setIsLogin(true)}
+                    onClick={() => openModal(<LoginForm />)}
                     className={isLogin ? styles.activeButton : styles.button}
                 >
                     Вход
                 </button>
             </motion.div>
 
-            {/* Отображение формы в зависимости от состояния */}
-            <motion.div
-                key={isLogin ? 'login' : 'register'} // Анимация при переключении
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
-            >
-                {isLogin ? <LoginForm /> : <Form />}
-            </motion.div>
+            {/* Модальное окно */}
+            {isModalOpen && (
+                <Modal onClose={closeModal}>
+                    {modalContent}
+                </Modal>
+            )}
         </motion.div>
     );
 };

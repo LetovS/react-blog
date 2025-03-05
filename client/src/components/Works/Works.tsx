@@ -55,7 +55,6 @@ const Works: React.FC = () => {
                 initialData={selectedTodo || ({} as ITodo)}
                 isEditMode={isEditMode}
             />
-            <ModalButton />
         </div>
     );
 };

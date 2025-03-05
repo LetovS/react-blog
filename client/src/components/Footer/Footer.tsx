@@ -2,6 +2,8 @@ import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ThemeContext } from '../../context/ThemeContext/ThemeContext';
 import './Footer.css';
+import ModalButton from "../Buttons/ModalButton";
+import FeedbackForm from "../Form/FeedbackForm";
 
 const Footer: React.FC = () => {
     const { theme } = useContext(ThemeContext); // Получаем текущую тему
@@ -16,7 +18,13 @@ const Footer: React.FC = () => {
     return (
         <footer className={`footer ${theme}`}>
             <p>© 2025 Мое React Приложение</p>
-            <button onClick={handleLogout}>Выйти</button> {/* Кнопка для выхода */}
+            <div className="btns-flex">
+                <button onClick={handleLogout} className="btns-flex-item">Выйти</button>
+                {/* Кнопка для выхода */}
+                <ModalButton buttonText="Написать мне" className="modal-button btns-flex-item">
+                    <FeedbackForm/>
+                </ModalButton>
+            </div>
         </footer>
     );
 };

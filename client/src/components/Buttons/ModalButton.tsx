@@ -1,15 +1,23 @@
 import React, { useState } from 'react';
-import Modal from '../Modal/Modal'; // Убедитесь, что Modal также мигрирован на TypeScript
+import Modal from '../Modal/Modal';
+import {IModalButtonProps} from "../../interfaces/IModalButtonProps"; // Убедитесь, что Modal также мигрирован на TypeScript
 
-const ModalButton: React.FC = () => {
+const ModalButton: React.FC<IModalButtonProps> = ({ buttonText, children, className }) => {
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
     return (
         <>
-            <button className="open-modal-btn" onClick={() => setIsModalOpen(true)}>
-                Написать мне
+            {/* Кнопка для открытия модального окна */}
+            <button className={className} onClick={() => setIsModalOpen(true)}>
+                {buttonText}
             </button>
-            {isModalOpen && <Modal onClose={() => setIsModalOpen(false)} />}
+
+            {/* Модальное окно */}
+            {isModalOpen && (
+                <Modal onClose={() => setIsModalOpen(false)}>
+                    {children}
+                </Modal>
+            )}
         </>
     );
 };

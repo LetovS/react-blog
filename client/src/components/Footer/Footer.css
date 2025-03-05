@@ -1,15 +1,77 @@
+/* Footer.css */
 .footer {
     background-color: #f0f0f0;
-    color: white;
+    color: #333; /* Изменен цвет текста для лучшей читаемости */
     padding: 1rem;
     text-align: center;
     position: fixed;
     bottom: 0;
     width: 100%;
-    font-size: 2rem;
+    font-size: 1rem; /* Уменьшен размер шрифта для футера */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1); /* Тень для футера */
 }
 
 .footer.dark {
     background-color: #1a1a1a;
     color: #fff;
+}
+
+/* Стили для кнопки выхода */
+.footer button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+.footer button:hover {
+    background-color: #0056b3;
+}
+
+/* Стили для кнопки ModalButton */
+.footer .modal-button {
+    background-color: #28a745; /* Зеленый цвет для кнопки "Написать мне" */
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+.footer .modal-button:hover {
+    background-color: #218838; /* Темно-зеленый при наведении */
+}
+
+/* Стили для темной темы */
+.footer.dark button {
+    background-color: #6c757d; /* Серый цвет для кнопок в темной теме */
+}
+
+.footer.dark button:hover {
+    background-color: #5a6268; /* Темно-серый при наведении */
+}
+
+.footer.dark .modal-button {
+    background-color: #28a745; /* Зеленый цвет для кнопки "Написать мне" в темной теме */
+}
+
+.footer.dark .modal-button:hover {
+    background-color: #218838; /* Темно-зеленый при наведении */
+}
+
+.btns-flex{
+    display: flex;
+    justify-content: center;
+}
+.btns-flex-item{
+    margin: 0 1.5rem;
 }

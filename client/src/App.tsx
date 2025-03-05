@@ -15,7 +15,7 @@ const App: React.FC = () => {
     return (
         <ThemeProvider>
             <Routes>
-                <Route path="/" element={<Home />} />
+                <Route path="/" element={<Layout><Home /></Layout>} />
                 <Route
                     path="/works"
                     element={
