@@ -1,9 +1,10 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import {IPost} from '../BlogPost/BlogPost';
 import './Blog.css';
 
-const Blog = () => {
-    const [posts, setPosts] = useState([]);
+const Blog: React.FC = () => {
+    const [posts, setPosts] = useState<IPost []>([]);
 
     useEffect(() => {
         // Запрос к API

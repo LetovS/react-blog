@@ -1,10 +1,10 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import Form from '../components/Form/Form.tsx'; // Импортируем форму регистрации
-import LoginForm from '../components/Form/LoginForm.tsx'; // Импортируем форму логина
+import Form from '../components/Form/Form'; // Импортируем форму регистрации
+import LoginForm from '../components/Form/LoginForm'; // Импортируем форму логина
 import styles from './Home.module.css'; // Предположим, что стили находятся в Home.module.css
 
-const Home = () => {
+const Home: React.FC = () => {
     const [isLogin, setIsLogin] = useState(false); // Состояние для переключения между формами
 
     return (

@@ -1,16 +1,17 @@
 import "./App.css";
-import Layout from "./components/Layout/Layout.js";
-import Works from "./components/Works/Works.tsx";
-import Blog from "./Routes/Blog/Blog.js";
-import BlogPost from "./Routes/BlogPost/BlogPost.js";
+import Layout from "./components/Layout/Layout";
+import Works from "./components/Works/Works";
+import Blog from "./Routes/Blog/Blog";
+import BlogPost from "./Routes/BlogPost/BlogPost";
 import { Routes, Route } from "react-router-dom";
-import Testimonials from "./components/Testimonial/Testimonials.tsx";
-import Home from "./pages/Home.jsx";
-import { ThemeProvider } from "./context/ThemeContext/ThemeContext.tsx";
-import Protected from './components/Protect/ProtectedRoute.tsx';
-import Gallery from "./components/Gallery/Gallery.tsx";
+import Testimonials from "./components/Testimonial/Testimonials";
+import Home from "./pages/Home";
+import { ThemeProvider } from "./context/ThemeContext/ThemeContext";
+import Protected from './components/Protect/ProtectedRoute';
+import Gallery from "./components/Gallery/Gallery";
+import React from "react";
 
-function App() {
+const App: React.FC = () => {
     return (
         <ThemeProvider>
             <Routes>
